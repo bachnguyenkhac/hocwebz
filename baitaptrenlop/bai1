@@ -1,0 +1,55 @@
+//lop pen
+public class Pen extends Product {
+    private String brand;
+
+    public Pen(String productCode, int price, String brand) {
+        super(productCode, price);
+        this.brand = brand;
+    }
+
+    @Override
+    public void show_info() {
+        System.out.println("Mã sản phẩm: " + productCode);
+        System.out.println("Giá: " + price);
+        System.out.println("Thương hiệu: " + brand);
+    }
+}
+//lop book
+public class Book extends Product {
+    private String author;
+
+    public Book(String productCode, int price, String author) {
+        super(productCode, price);
+        this.author = author;
+    }
+
+    @Override
+    public void show_info() {
+        System.out.println("Mã sản phẩm: " + productCode);
+        System.out.println("Giá: " + price);
+        System.out.println("Tác giả: " + author);
+    }
+}
+//luu tru va sap xep cac san pham
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Product> products = new ArrayList<>();
+   
+        products.add(new Pen("P1", 10000, "ABC"));
+        products.add(new Pen("P2", 20000, "XYZ"));
+        products.add(new Pen("P3", 30000, "DEF"));
+
+        products.add(new Book("B1", 50000, "Tác giả 1"));
+        products.add(new Book("B2", 50000, "Tác giả 2"));
+
+        Collections.sort(products, (product1, product2) -> product1.getPrice() - product2.getPrice());
+
+        for (Product product : products) {
+            product.show_info();
+            System.out.println();
+        }
+    }
+}

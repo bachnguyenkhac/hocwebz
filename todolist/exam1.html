@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Using Local Storage</title>
+</head>
+<body>
+    <button id="change-color">Change Color</button>
+    <h3>cmc.edu.vn</h3>
+    <script>
+        // Mảng chứa mã màu hex của 7 sắc cầu vòng
+        var rainbowColors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3'];
+        
+        // Biến để lưu vị trí hiện tại trong mảng màu
+        var currentIndex = 0;
+
+        // Lắng nghe sự kiện click vào nút "Change Color"
+        document.querySelector('#change-color').addEventListener('click', function () {
+            // Lấy phần tử h3
+            var heading = document.querySelector('h3');
+            
+            // Đặt màu của phần tử h3 thành màu ở vị trí hiện tại trong mảng màu
+            heading.style.color = rainbowColors[currentIndex];
+            
+            // Tăng vị trí hiện tại, nếu đã ở cuối mảng thì quay lại vị trí đầu tiên
+            currentIndex = (currentIndex + 1) % rainbowColors.length;
+        });
+    </script>
+</body>
+</html>

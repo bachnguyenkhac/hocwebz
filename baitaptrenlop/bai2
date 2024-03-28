@@ -1,0 +1,19 @@
+public static int countCharacters(c:\Users\ADMINA\Downloads\baitap2.txt) throws IOException {
+    int count = 0;
+
+    try (FileReader fileReader = new FileReader(filePath);
+         BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            for (char c : line.toCharArray()) {
+                if (Character.isLetter(c)) {
+                    count++;
+                }
+            }
+        }
+    }
+
+    return count;
+}
+
