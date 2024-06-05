@@ -1,24 +1,44 @@
-var search = document.querySelector('.search')
-var city = document.querySelector('.city')
-var country = document.querySelector('.country')
-var value = document.querySelector('.value')
-var shortDesc = document.querySelector('.short-desc')
-var visibility = document.querySelector('.visibility span')
-var wind = document.querySelector('.wind span')
-var sun = document.querySelector('.sun span')
-var value  = document.querySelector('.value')
+var input = document.querySelector('input')
+var button = document.querySelector('button')
+var form = document.querySelector('form')
+var todos = document.querySelector('.todos')
 
 
-async function changeWeatherUI(){
-    search.value.trim()
-   let apiURL = `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=8c67e07e9702124bbb53d7144f8a9785`
-  let data = await fetch(apiURL).then(res=> res.json())
-  console.log(data);
-  city.innerText = data.name
-  city.innerText = data.sys.country
-  visibility.innerText = data.visibility + 'm'
-  wind.innerText = data.wind.speed + 'm/s'
-  sun.innerText = data.main.humidity + '%'
-  value.innerText = (data.main.temp - 273.15)
+form.addEventListener('submit', function(event){
+event.preventDefault();
+let val = input.value.trim()
+if(val){
+addTodoElement({
+    text: val,
+})
 }
-changeWeatherUI()
+input.value = ''
+})
+
+function addTodoElement(todo){
+//{
+//text:
+//status: completed
+//}
+//<li>
+//<span>Test</span>
+//<i class="fa-solid fa-trash"></i>
+//</li>
+var li = document.createElement('li')
+li.innerHTML = `
+        <span>$(todo.text)</span>
+        <i class="fa-solid fa-trash"></i>
+`
+if(todo.status === 'comleted'){
+li.setAttribute('class', 'completed')
+}
+li.addEventListener('click',function(){
+    this.classList.toggle('completed')
+})
+li.querySelector('i').addEventListener('click',function(){
+   // console.log(this.parentElement)
+   this.parentElement.remove()
+})
+
+todos.appendChild(li)
+}
