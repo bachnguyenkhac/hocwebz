@@ -1,71 +1,82 @@
+:root{
+    --success:rgb(22, 208, 22);
+    --warning:rgb(202, 134, 8);
+    --error:rgb(213, 20, 20);
+
+    --success-light:rgba(0,128,0,0.4);
+    --warning-light:rgba(203, 181, 16, 0.4);
+    --error-light:rgba(244,16,16,0.4);
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins';
+
 }
 body{
     height: 100vh;
-    background: linear-gradient(to right,#ffe000,#779f0c);
-    font-family: sans-serif;
-
-}
-.container{
-    width: 400px;
-    margin: 100px auto;
-    background: white;
-    padding-top: 10px 0;
-    border-radius:6px;
-    overflow: hidden;
-
-}
-form{
-    border-bottom: 1px solid #aaa;
-    padding: 10px 20px;
-    font-size: 22px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    background: #ecf0f1;
 }
-form input{
-font-size: 24px;
-width: 100%;
-margin-right:15px;
+.control button{
+padding: 8px 16px;
+border-radius: 4px;
 border: none;
 outline: none;
-
-}
-form button{
-background: yellowgreen;
-padding: 5px 15px;
+font-size: 28px;
 color: white;
-font-size: 20px;
-font-weight: bold;
-border: none;
-border-radius: 6px;
-}
-.todos{
-    list-style: none;
+margin: 0 10px;
+
 }
 
-
-.todos li{
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #e5e5e5;
-    font-size: 25px;
-    align-items: center;
-    cursor: pointer;
-    
-    
+.success{
+    background:var(--success);
 }
-.todos li span{
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.warning{
+    background:var(--warning);
+}
+.error{
+    background:var(--error);
+}
+#toasts{
+position: fixed;
+top: 10px;
+right: 10px;
+}
+.toast{
+    padding: 20px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 26px;
+    border-left: 6px solid var(--success);
     overflow: hidden;
+.toast i{
+    margin:0 10px;
 }
-li.completed{
-    color: #aaa;
+.toast .countdown{
+    background: var(--success);
+    position:absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    animation: countdown 2s ease;
 }
-li.completed span{
-    text-decoration: line-through;
+.toast.success{
+    background: var(--success-light);
+    
+}
+@keyframes countdown {
+ 0%{
+width: 100%;
+ }   
+ 100%{
+    width: 0%;
+ }
+}
 }
