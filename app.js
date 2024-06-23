@@ -1,44 +1,46 @@
-var input = document.querySelector('input')
-var button = document.querySelector('button')
-var form = document.querySelector('form')
-var todos = document.querySelector('.todos')
+var btnSuccess = document.querySelector('.control .success')
+var btnWarning = document.querySelector('.control .warning')
+var btnError = document.querySelector('.control .error')
 
-
-form.addEventListener('submit', function(event){
-event.preventDefault();
-let val = input.value.trim()
-if(val){
-addTodoElement({
-    text: val,
+btnSuccess.addEventListener('click', function(){
+    createToast('success')
 })
+btnWarning.addEventListener('click', function(){
+    createToast('warning')
+})
+btnError.addEventListener('click', function(){
+    createToast('error')
+})
+
+function createToast(status){
+    let templateInner = `<i class="fa-solid fa-circle-check"></i>
+   <span class="message">This is a success message</span>`
+switch(status){
+    case 'success':
+         templateInner = `<i class="fa-solid fa-circle-check"></i>
+   <span class="message">This is a success message</span>`
+        break;
+
+    case 'error':
+         templateInner = ` <i class="fa-solid fa-circle-exclamation"></i>
+     <span class="message">This is a error message</span>`
+        break;
+
+    case 'warning':
+         templateInner = `<i class="fa-solid fa-triangle-exclamation"></i>
+      <span class="message">This is a Warning message</span>`
+        break;
 }
-input.value = ''
-})
 
-function addTodoElement(todo){
-//{
-//text:
-//status: completed
-//}
-//<li>
-//<span>Test</span>
-//<i class="fa-solid fa-trash"></i>
-//</li>
-var li = document.createElement('li')
-li.innerHTML = `
-        <span>$(todo.text)</span>
-        <i class="fa-solid fa-trash"></i>
-`
-if(todo.status === 'comleted'){
-li.setAttribute('class', 'completed')
-}
-li.addEventListener('click',function(){
-    this.classList.toggle('completed')
-})
-li.querySelector('i').addEventListener('click',function(){
-   // console.log(this.parentElement)
-   this.parentElement.remove()
-})
+   var toast = document.createElement('div')
+   toast.classList.add('toast')
+   toast.classList.add(status)
+toast.innerHTML = `${templateInner}
+   <span class="countdown"></span>`
 
-todos.appendChild(li)
+   var toastList = document.getElementById('toasts')
+   toastList.appendChild(toast)
+   setTimeout(function(){
+    toast.style.animation = 'slide_hide 2s ease forwards'
+   },3000)
 }
